@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block style %}
+        body {
+            display:block;
+            text-align:left;
+            padding-top: 0px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+{% endblock style %}
+{% block body %}
+
+<h4 class="my-10" style="display: inline-block;">Hello... {{request.user}}</h4>
+<a class="btn btn-primary my-10" type="" href="/logout">Logout</a><br><br><br>
+Add New to database {% if teacher is not None %}<a href="add/" class=" btn btn-primary ">Add</a>{% else %}<a href="addstudent/" class=" btn btn-primary ">add</a>{% endif %}<br><br><br>
+<div class="container">
+<table class=" table">
+<h5 >Students List</h5>
+    <tr>
+        <th>Student List</th>
+        <th>Action</th>
+    </tr>
+    {% for stud in student %}
+    <tr>
+        <td><a href="{% url 'studdetail' stud.id %}" class="">{{stud.username}}</a></td>
+        <td><a href="{% url 'deletestud' stud.id %}" class=" btn btn-primary my-2">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table><br><br><br>
+</div>
+{% if teacher is not None %}
+<div class="container">
+<table class="m-10 table">
+
+<h5 >Teachers List</h5>
+    <tr>
+        <th>Teacher List</th>
+        <th>Action</th>
+    </tr>
+    {% for teach in teacher %}
+    <tr>
+        <td><a href="{% url 'teachdetail' teach.id %}" class="">{{teach.username}}</a></td>
+        <td><a href="{% url 'deleteteach' teach.id %}" class=" btn btn-primary my-2">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endif %}
+{% endblock body %}

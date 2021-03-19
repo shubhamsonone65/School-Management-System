@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}signup page{% endblock title %}
+{% block body %}
+<div class="container">
+<h3 class="my-3">Welcome to SignUp Page</h3>
+<form action="" method="post">
+{% csrf_token %}
+<p>Username can't have spaces</p>
+{% for field in form %}
+  <div class="my-3">
+    <label for="exampleInputEmail1" class="form-label">{{field.label}}</label>
+    {{field}}
+  {% endfor %}
+    <div>
+  <label for="select" class="my-3">You are a : </label>
+<select name="select" id="select">
+    <option value="superadmin">Superadmin</option>
+    <option value="teacher">Teacher</option>
+    <option value="students">Student</option>
+</select></div>
+  <button type="submit" class="w-30 btn btn-primary my-3">Create User</button>
+</form>
+<div>
+{% for msg in messages %}
+  {{msg}}
+{% endfor %}
+</div>
+<div>
+Already have a account? <a href="/" class="btn btn-primary my-2">Click to login</a>
+</div>
+</div>
+{% endblock body %}
